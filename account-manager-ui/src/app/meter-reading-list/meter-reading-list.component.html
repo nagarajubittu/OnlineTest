@@ -1,0 +1,43 @@
+<app-meter-reading-form></app-meter-reading-form>
+<br/>
+<form novalidate autocomplete="off" #form="ngForm" (submit)="onUpload(form)">
+    <div class="form-group">
+        <div class="form-group">
+            <label for="file">Choose File</label>
+            <input type="file"
+            #fileinput=""
+            required
+                   id="file"
+                   (change)="handleFileInput($event)">
+        </div>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-info btn-lg btn-block" type="submit" [disabled]="form.invalid">SUBMIT</button>
+    </div>
+</form>
+<select class='select-option'
+    #mySelect
+    (change)='onOptionsSelected(mySelect.value)'>
+    <option class="option" value="0" [selected]>All</option>
+   <option class='option'
+   *ngFor='let option of accountService.list'
+   [value]="option.accountId">{{option.accountId}}</option>
+</select>
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th>Account Number</th>
+            <th>Reading Datetime</th>
+            <th>Reading Value</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tr *ngFor="let a of service.list">
+        <td>{{a.accountId}}</td>
+        <td>{{a.readingDatetime}}</td>
+        <td>{{a.readingValue}}</td>
+        <td>
+            <i class="fa fa-trash fa-lg text-danger" title="Delete" (click)="onDelete(a.meterId)"></i>
+        </td>
+    </tr>
+</table>

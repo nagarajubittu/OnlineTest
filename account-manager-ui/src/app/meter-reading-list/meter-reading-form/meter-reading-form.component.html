@@ -1,0 +1,24 @@
+<form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)">
+    <div class="form-group">
+        <label>Account Number</label>
+        <input class="form-control form-control-lg" placeholder="Account Number" name="accountId"
+            #accountId="ngModel" [(ngModel)]="service.formData.accountId"
+            required [class.invalid]="accountId.invalid && accountId.touched">
+    </div>
+    <div class="form-group">
+        <label>Reading Datetime</label>
+        <input class="form-control form-control-lg" placeholder="Reading Datetime" name="meterReadingDateTime"
+            #meterReadingDateTime="ngModel" [(ngModel)]="service.formData.meterReadingDateTime"
+            required [class.invalid]="meterReadingDateTime.invalid && meterReadingDateTime.touched">
+    </div>
+    <div class="form-group">
+        <label>Reading Value</label>
+        <input class="form-control form-control-lg" placeholder="Reading Value" name="meterReadValue"
+            #meterReadValue="ngModel" [(ngModel)]="service.formData.meterReadValue"
+            required [class.invalid]="meterReadValue.invalid && meterReadValue.touched">
+    </div>
+    <div class="form-group">
+        <button class="btn btn-info btn-lg btn-block" type="submit" [disabled]="form.invalid">SUBMIT</button>
+        <button class="btn btn-info btn-lg btn-block" type="button" (click)="resetForm(form)">RESET</button>
+    </div>
+</form>

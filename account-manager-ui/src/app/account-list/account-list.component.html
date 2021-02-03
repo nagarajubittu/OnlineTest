@@ -1,0 +1,21 @@
+<app-account-create-form></app-account-create-form>
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th>Account Number</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tr *ngFor="let a of service.list">
+        <td>{{a.accountId}}</td>
+        <td>{{a.firstName}}</td>
+        <td>{{a.lastName}}</td>
+        <td>
+            <i class="fa fa-pencil fa-lg text-primary" title="Edit" (click)="populateForm(a)"></i>
+            <span style="padding-right: 12px;"></span>
+            <i class="fa fa-trash fa-lg text-danger" title="Delete" (click)="onDelete(a.accountId)"></i>
+        </td>
+    </tr>
+</table>
