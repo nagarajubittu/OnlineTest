@@ -11,7 +11,7 @@ export class MeterReadingService {
 
   formData: PostMeterReading = new PostMeterReading();
   filterAccountId = 0;
-  readonly baseURL = 'http://localhost:55000';
+  readonly baseURL = 'http://localhost:5000';
   list: MeterReading[] = [];
 
   constructor(private http: HttpClient) { }

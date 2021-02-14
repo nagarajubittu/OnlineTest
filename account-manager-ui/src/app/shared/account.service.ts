@@ -11,7 +11,7 @@ export class AccountService {
 
   formData: Account = new Account();
   editAccount = false;
-  readonly baseURL = 'http://localhost:55000';
+  readonly baseURL = 'http://localhost:5000';
   list: Account[] = [];
 
   constructor(private http: HttpClient) { }

@@ -1,0 +1,48 @@
+services:
+  accountmanager.api:
+    build:
+      context: C:\Users\Raju\Desktop\Online\OnlineTest\AccountManager
+      dockerfile: src/AccountManager.Api/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: AccountManager.Api
+      target: base
+    container_name: accountmanager-api
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      ASPNETCORE_URLS: http://+:5000
+      DOTNET_USE_POLLING_FILE_WATCHER: '1'
+      NUGET_FALLBACK_PACKAGES: ''
+    image: accountmanager-api:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages  "/app/bin/Debug/net5.0/AccountManager.Api.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    ports:
+    - target: 5000
+    tty: true
+    volumes:
+    - C:\Users\Raju\Desktop\Online\OnlineTest\AccountManager\src\AccountManager.Api:/app:rw
+    - C:\Users\Raju\vsdbg\vs2017u5:/remote_debugger:rw
+    - C:\Users\Raju\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\Raju\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+    - C:\Users\Raju\.nuget\packages:/root/.nuget/packages:ro
+    - C:\Users\Raju\Desktop\Online\OnlineTest\AccountManager:/src:rw
+  accountmanger.db:
+    command: --default-authentication-plugin=mysql_native_password
+    container_name: accountmanager-mysqldb
+    environment:
+      MYSQL_DATABASE: AccountManager
+      MYSQL_ROOT_PASSWORD: root
+    image: mysql
+    ports:
+    - published: 3306
+      target: 3306
+    volumes:
+    - C:\Users\Raju\Desktop\Online\OnlineTest\AccountManager\scripts\schema.sql:/docker-entrypoint-initdb.d/1.sql:rw
+    - C:\Users\Raju\Desktop\Online\OnlineTest\AccountManager\scripts\data.sql:/docker-entrypoint-initdb.d/2.sql:rw
+version: '3.4'

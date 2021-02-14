@@ -1,0 +1,26 @@
+services:
+  accountmanager.api:
+    build:
+      context: C:\Users\Raju\Desktop\Online\OnlineTest\AccountManager
+      dockerfile: src/AccountManager.Api/Dockerfile
+    container_name: accountmanager-api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:5000
+    image: accountmanager-api
+    ports:
+    - target: 5000
+  accountmanger.db:
+    command: --default-authentication-plugin=mysql_native_password
+    container_name: accountmanager-mysqldb
+    environment:
+      MYSQL_DATABASE: AccountManager
+      MYSQL_ROOT_PASSWORD: root
+    image: mysql
+    ports:
+    - published: 3306
+      target: 3306
+    volumes:
+    - C:\Users\Raju\Desktop\Online\OnlineTest\AccountManager\scripts\schema.sql:/docker-entrypoint-initdb.d/1.sql:rw
+    - C:\Users\Raju\Desktop\Online\OnlineTest\AccountManager\scripts\data.sql:/docker-entrypoint-initdb.d/2.sql:rw
+version: '3.4'
