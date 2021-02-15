@@ -9,7 +9,8 @@ services:
       ASPNETCORE_URLS: http://+:5000
     image: accountmanager-api
     ports:
-    - target: 5000
+    - published: 5000
+      target: 5000
   accountmanger.db:
     command: --default-authentication-plugin=mysql_native_password
     container_name: accountmanager-mysqldb

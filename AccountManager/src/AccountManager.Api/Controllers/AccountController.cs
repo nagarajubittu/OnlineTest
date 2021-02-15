@@ -52,7 +52,7 @@ namespace AccountManager.Api.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<AccountModel>), StatusCodes.Status200OK)]
-        [Route("/accounts")]
+        [Route("/account")]
         public async Task<ActionResult> GetAccountsAsync()
         {
             try
